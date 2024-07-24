@@ -1,0 +1,62 @@
+#This file is made for the sole purpose of seeing how API calls work and what it should return
+#Once you understand how the request works using this, you can use that knowledge when doing API calls from the front end
+
+#As of 07/24/2024, I have Vanity's backend available in 2 places.
+#1. Here (all in the backend folder that can be ran on localhost)
+#2. The cloud domain https://vanity-backend-c0mn.onrender.com/
+
+
+#1
+#To run the API on your local machine, make sure that you are in the backend folder. 
+#create an .env file. The file should litterally be called .env and this will hold passwords to make backend work. I will email you what the file should be
+#after that is done, do npm i to install everything you need from the package.json.
+#then you can finally run the command 'node index.js' which will start the backend server
+#we will mainly be doing testing using this way
+
+#2
+#The API is already running on the cloud domain. However since I am using a free tier, everyime you initially make a request to it, it has to "wake up".
+#this means that it will take 1-2 minutes starting back up if the server has not been in used for more than 15 minutes. But once it's up, it is quick
+#We will use this cloud domain for the online app so that way anyone from anywhere can have both access to vanity-inc.com and the backend for it
+
+
+#The api requests will follow the same format for the 2 methods listed above. The only difference will be the name at the beginning of the slash
+#Example 1: http://localhost:8080/users
+#Example 2: https://vanity-backend-c0mn.onrender.com/users
+
+
+
+#Get all user info
+GET http://localhost:8080/users
+
+### Second Request
+POST http://localhost:8080/users/createUser
+Content-Type: application/json
+
+//
+
+{
+    "username": "mateustest",
+    "hashed_password": "mateustest",
+    "email": "mateustest@gmail.com"
+}
+###EXAMPLE DELETE REQUEST
+POST http://localhost:8080/users/deleteUser
+Content-Type: application/json
+
+{
+    "_id": "669d7cc33208534b77225ba3"
+}
+
+
+###Login Request
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{
+    "username": "mateustest",
+    "hashed_password": "mateustest"
+}
+
+###Example of using token to access webpage stuff
+GET http://localhost:8080/users/getUser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjlmZGQ1MTZlMDA4ZTRlNTEyOTBmNzEiLCJ1c2VybmFtZSI6Im1hdGV1c3Rlc3QiLCJpYXQiOjE3MjE3NTI5NTN9.THxdqtR_xY0NuvZtHkgJ9W4O3uL9XOGYT7eyostGZ1M
